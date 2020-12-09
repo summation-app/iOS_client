@@ -1,0 +1,27 @@
+{
+  "name": "Sumation-iOS-Client",
+  "version": "0.1.0",
+  "summary": "A short description of Sumation-iOS-Client.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Hanh Pham N/Sumation-iOS-Client",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Hanh Pham N": "pnhanh0412@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Hanh Pham N/Sumation-iOS-Client.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "Sumation-iOS-Client/Classes/**/*",
+  "dependencies": {
+    "Alamofire": [
+      "~> 5.4.0"
+    ]
+  }
+}

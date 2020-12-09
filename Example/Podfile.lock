@@ -1,0 +1,23 @@
+PODS:
+  - Alamofire (5.4.0)
+  - Summation-iOS-Client (0.1.0):
+    - Alamofire (~> 5.4.0)
+
+DEPENDENCIES:
+  - Summation-iOS-Client (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  Summation-iOS-Client:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  Summation-iOS-Client: b3bc3b346f28407cc883fdcc52f7845a36f9f426
+
+PODFILE CHECKSUM: acd25cb64f033c6c45ad14d66d8205088c56f75a
+
+COCOAPODS: 1.10.0
