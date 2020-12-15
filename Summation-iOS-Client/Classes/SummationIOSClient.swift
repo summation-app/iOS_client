@@ -21,31 +21,31 @@ public class SummationClient {
     }
     
     // MARK: Database query
-    public func dbQueries(_ type: DatabaseQueriesType, completion: @escaping ApiCompletion) -> DataRequest? {
+    public func db(_ type: DatabaseQueriesType, completion: @escaping ApiCompletion) -> DataRequest? {
         guard configIsValidate() else {
             completion(.failure(SummationiOSClientError.notYetConfig))
             return nil
         }
         let target = SummationTarget.databaseQueries(type)
-        return api.request(target: target) { completion($0) }
+        return apiManager.request(target: target) { completion($0) }
     }
     
-    public func apiRequest(_ type: APIRequestType, completion: @escaping ApiCompletion) -> DataRequest? {
+    public func api(_ type: APIRequestType, completion: @escaping ApiCompletion) -> DataRequest? {
         guard configIsValidate() else {
             completion(.failure(SummationiOSClientError.notYetConfig))
             return nil
         }
         let target = SummationTarget.api(type)
-        return api.request(target: target) { completion($0) }
+        return apiManager.request(target: target) { completion($0) }
     }
     
-    public func requestChain(_ type: [SummationFuncType], completion: @escaping ApiCompletion) -> DataRequest? {
+    public func chain(_ type: [SummationFuncType], completion: @escaping ApiCompletion) -> DataRequest? {
         guard configIsValidate() else {
             completion(.failure(SummationiOSClientError.notYetConfig))
             return nil
         }
         let target = SummationTarget.chain(type)
-        return api.request(target: target) { completion($0) }
+        return apiManager.request(target: target) { completion($0) }
     }
     
     private func configIsValidate() -> Bool {

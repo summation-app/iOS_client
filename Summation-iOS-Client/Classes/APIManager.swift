@@ -20,7 +20,7 @@ extension NetworkReachabilityManager {
 
 public typealias ApiCompletion = (Result<AFDataResponse<Any>, Error>) -> Void
 
-let api = APIManager()
+let apiManager = APIManager()
 
 class APIManager {
     

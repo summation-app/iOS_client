@@ -22,20 +22,25 @@ class ViewController: UIViewController {
     
     // Step1: Create client
     let summationClient = SummationClient.shared
-    let gateway_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdW1tYXRpb24iLCJzdWIiOiJhZG1pbiIsInVpZCI6MCwib3JnYW5pemF0aW9uX2lkIjowLCJhcHBsaWNhdGlvbl9pZCI6MCwicm9sZV9pZCI6MCwic2NvcGUiOiJkZXZlbG9wbWVudCIsImV4cCI6MjIzNzkwMjAyMy4zOTkyNDQzfQ.ROgO4hzjK0UCc1Ar_2-O0Q0ZsN5SHx-QEXAWkPC7QaoA8YEgWqTQeFGvZ6s8e94THGFFbJtQkvlfoJ9RWyDlgi4N8IIsHu3eM1eO1HxmhdZp3kSpMKSGvkRZ4jrGpFEHYLXQM8L1oMVghwfJHbRU7JywXlAvYArmpa3jw1_LVw3DUzojjJ6fv30OQJRz0dDACdxyqkvyVfA4ebNC2KWUjd_XMnIMvQxU4FJFAEVwW_Q2pJrucNb4GwswQuRvTUseXFYrP4XoFDag_iZe5chrNqJSAJFhvnSO9Px-HINqzein6zyE50-B30xiN8CwUGvAOt5v9qH11-Of4qEo51S8Uw"
-    let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdW1tYXRpb24iLCJzdWIiOiJhZG1pbiIsInVpZCI6MCwib3JnYW5pemF0aW9uX2lkIjowLCJyb2xlX2lkIjowfQ.LWURX-7KPQqnAFLU4aF2W3di-MnhlyO3wVkhz7K2pzZi1XFUFXws7m0BnvBwQd70d39cWlmpOTCwG2RN8UD4bvaW9bfnv-qhEauYyNaXWbvSquTNKM5lrBxa4oIiNGmKfMYL3BNHqsl655z4p_3eMqkSZRXhgLroBeC7RPbSojBrr7zoAotLadBB0ImFYoffN4PdVK0AQFL9Kcz2C1FbliRd7HU9070REdRiuAKtAsg4Cl_vM0rHbUabgZoMaxKWbg5y-XBwSlKykYTqF58jqnHCoeNYdxPBlPiK4lBzXu3dtX2gqBq_4XMSWAGM6VKUw8G9l7DKl3klQV_JKKSz9w"
-    let defaultDatabase = "summation"
+    
+    // Please get all config from https://docs.summation.app
+    let gateway_token = ""
+    let token = ""
+    let defaultDatabase = ""
+    let gatewayUrl = ""
+    let apiUrl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // STEP2: Configuration client
-        let options = SummationOptions(gatewayUrl: "http://162.223.31.136:8000", token: token, gatewayToken: gateway_token, defaultDatabase: defaultDatabase)
+        let options = SummationOptions(gatewayUrl: gatewayUrl, token: token,
+                                       gatewayToken: gateway_token, defaultDatabase: defaultDatabase)
         summationClient.setOptions(options)
     }
 
     @IBAction func didTapTestQueriesButton(_ sender: Any) {
-        _ = summationClient.dbQueries(.query(sql: "SELECT * FROM queries WHERE id=:id", parameters: ["id": 1], databaseName: "summation")) { [weak self] (result) in
+        _ = summationClient.db(.query(sql: "SELECT * FROM queries WHERE id=:id", parameters: ["id": 1], databaseName: defaultDatabase)) { [weak self] (result) in
             switch result {
             case .success(let afDataResponse):
                 switch afDataResponse.result {
@@ -54,7 +59,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapReadQueriesButton(_ sender: Any) {
-        _ = summationClient.dbQueries(.read(table: "Queries", parameters: ["id": 1], databaseName: "summation")) { [weak self] (result) in
+        _ = summationClient.db(.read(table: "Queries", parameters: ["id": 1], databaseName: defaultDatabase)) { [weak self] (result) in
             switch result {
             case .success(let afDataResponse):
                 switch afDataResponse.result {
@@ -73,7 +78,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapTestGetButton(_ sender: Any) {
-        _ = summationClient.apiRequest(.get(url: "http://api.ipapi.com/98.33.28.214", parameters: nil, headers: nil )) { [weak self] (result) in
+        _ = summationClient.api(.get(url: apiUrl, parameters: nil, headers: nil)) { [weak self] (result) in
             switch result {
             case .success(let afDataResponse):
                 switch afDataResponse.result {
